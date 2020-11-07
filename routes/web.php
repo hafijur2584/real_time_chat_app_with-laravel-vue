@@ -20,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/contacts', 'HomeController@contacts')->name('contacts');
+Route::get('/conversation/{id}', 'HomeController@getMessagesFor')->name('getMessages');

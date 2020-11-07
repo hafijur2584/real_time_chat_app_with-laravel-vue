@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth');
+        return $this->middleware('auth');
     }
+    
 
     /**
      * Show the application dashboard.
@@ -24,5 +22,13 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function contacts(){
+        $contacts = User::all();
+        return $contacts;
+    }
+    public function getMessagesFor($id){
+        $messages = Message::where('from',$id)->orWhere('to',$id)->get();
+        return $messages;
     }
 }
