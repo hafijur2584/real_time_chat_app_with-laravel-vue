@@ -1,5 +1,5 @@
 <template>
-    <div class="feed">
+    <div class="feed" ref="feed">
         <ul v-if="contact">
             <li v-for="message in messages" :class="`message${message.to == contact.id?' sent':' received'}`" :key="message.id">
                 <div class="text">
@@ -18,6 +18,21 @@ export default {
         messages:{
             type:Array,
             required:true
+        }
+    },
+    methods:{
+        scrollToBottom(){
+            setTimeout(() =>{
+                this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
+            },50);
+        }
+    },
+    watch:{
+        contact(contact){
+            this.scrollToBottom();
+        },
+        messages(messages){
+            this.scrollToBottom();
         }
     }
 }
@@ -45,13 +60,13 @@ export default {
                     }
 
                     &.received{
-                        text-align: right;
+                        text-align: left;
                         .text{
                             background: #b2b2b2;
                         }
                     }
                     &.sent {
-                        text-align: left;
+                        text-align: right;
                         .text{
                             background: #81c4f9;
                         }

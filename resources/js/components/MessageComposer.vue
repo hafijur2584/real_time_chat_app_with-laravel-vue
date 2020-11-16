@@ -11,7 +11,8 @@ export default {
         }
     },
     methods:{
-        send(){
+        send(e){
+            e.preventDefault();
             if(this.message == ''){
                 return;
             }

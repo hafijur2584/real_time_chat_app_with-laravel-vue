@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Message;
-use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,12 +21,5 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function contacts(){
-        $contacts = User::all();
-        return $contacts;
-    }
-    public function getMessagesFor($id){
-        $messages = Message::where('from',$id)->orWhere('to',$id)->get();
-        return $messages;
-    }
+    
 }
